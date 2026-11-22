@@ -1,0 +1,21 @@
+name: zqa approval fixture
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'environment'
+        required: false
+        default: 'approval-gate'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "build ok"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: approval-gate
+    steps:
+      - run: echo "deploy approved and running (QA fixture, no cloud)"
